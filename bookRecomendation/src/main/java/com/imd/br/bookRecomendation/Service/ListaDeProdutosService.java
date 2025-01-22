@@ -2,6 +2,7 @@ package com.imd.br.bookRecomendation.Service;
 
 import java.util.Set;
 
+import com.imd.br.bookRecomendation.Model.Livro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class ListaDeProdutosService {
     public void adicionarProduto(Long idLista, Long idProduto) {
         ListaDeProdutos listaDeProdutos = listaDeProdutosRepository.findById(idLista).get();
         Set<Produto> produtos = listaDeProdutos.getProdutos();
-        Produto produto = new Produto();
+        Produto produto = new Livro();
         produto.setId(idProduto);
         produtos.add(produto);
         listaDeProdutos.setProdutos(produtos);

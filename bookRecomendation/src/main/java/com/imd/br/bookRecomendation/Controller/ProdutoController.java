@@ -1,6 +1,7 @@
 package com.imd.br.bookRecomendation.Controller;
 
 import com.imd.br.bookRecomendation.Api.ImportadorProdutos;
+import com.imd.br.bookRecomendation.Model.Livro;
 import com.imd.br.bookRecomendation.Model.Produto;
 import com.imd.br.bookRecomendation.Service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ import java.util.Optional;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoService ls;
+    private ProdutoService<Livro> ls;
     @Autowired
     private ImportadorProdutos il;
 
     @GetMapping("/filtro")
-    public List<Produto> filtrarProdutos(@RequestParam(required = false) String titulo,
+    public List<Livro> filtrarProdutos(@RequestParam(required = false) String titulo,
             @RequestParam(required = false) String autor,
             @RequestParam(required = false) String genero,
             @RequestParam(required = false) Double avaliacaoMediaMin) {
@@ -31,22 +32,22 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<Produto> listarTodos() {
+    public List<Livro> listarTodos() {
         return ls.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public Optional<Produto> buscarPorId(@PathVariable Long id) {
+    public Optional<Livro> buscarPorId(@PathVariable Long id) {
         return ls.buscarPorId(id);
     }
 
     @PostMapping
-    public Produto salvar(@RequestBody Produto produto) {
+    public Livro salvar(@RequestBody Livro produto) {
         return ls.salvar(produto);
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
+    public Livro atualizar(@PathVariable Long id, @RequestBody Livro produtoAtualizado) {
         return ls.atualizar(id, produtoAtualizado);
     }
 

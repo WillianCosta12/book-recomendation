@@ -1,5 +1,6 @@
 package com.imd.br.bookRecomendation.Api;
 
+import com.imd.br.bookRecomendation.Service.LivroService;
 import com.imd.br.bookRecomendation.Service.ProdutoService;
 import com.imd.br.bookRecomendation.Service.OpenLibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ public class ImportadorProdutos {
     @Autowired
     private OpenLibraryService openLibraryService;
     @Autowired
-    private ProdutoService ls;
+    private LivroService ls;
 
     public void importarProdutos(String query) {
         int page = 1;
