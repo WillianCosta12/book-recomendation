@@ -7,7 +7,7 @@ https://developers.mercadolivre.com.br/pt_br/itens-e-buscas
 https://api.mercadolibre.com/sites/MLB/categories
 """
 
-MARKETPLACE_ID = 2
+MARKETPLACE_ID = 1
 
 def buscar_preco_produtos_mercado_livre(nome):
     base_url = "https://api.mercadolibre.com/sites/MLB/search"
@@ -41,7 +41,7 @@ def buscar_preco_produtos_mercado_livre(nome):
 
 def get_all_books():
     query = """
-    SELECT produto.titulo, produto.autor, produto.editora, marketplace_product.id, produto.id FROM produto 
+    SELECT produto.titulo, marketplace_product.id, produto.id FROM produto 
     LEFT JOIN marketplace_product ON produto.id = marketplace_product.produto_id
     """
     cursor.execute(query)
@@ -68,7 +68,7 @@ def criar_marketplace_product(produto_id, price, marketplace_id, url, image_url,
 db_connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="admin",
+    password="1234",
     database="bookrecomendation"
 )
 cursor = db_connection.cursor()
@@ -79,12 +79,10 @@ updated_books = 0
 produtos = get_all_books()
 for produto in produtos:
     titulo = produto[0]
-    autor = produto[1]
-    editora = produto[2]
-    marketplace_product_id = produto[3]
-    id = produto[4]
+    marketplace_product_id = produto[1]
+    id = produto[2]
 
-    resultado = buscar_preco_produtos_mercado_livre(f"{titulo} - {autor} - {editora}")
+    resultado = buscar_preco_produtos_mercado_livre(f"{titulo}")
     if marketplace_product_id:
         atualizar_marketplace_product(
             produto_id=id,

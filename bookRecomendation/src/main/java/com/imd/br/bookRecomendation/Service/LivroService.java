@@ -64,6 +64,8 @@ public class LivroService implements ProdutoService<Livro> {
             produto.setGenero(doc.path("subject").isArray() ? doc.path("subject").get(0).asText() : "Desconhecido");
             produto.setSinopse(doc.path("description").asText());
             produto.setLinkImage("https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg");
+            produto.setAutor(doc.path("authors").isArray() ? doc.path("authors").get(0).asText() : "Desconhecido");
+            produto.setNumeroPaginas(doc.path("number_of_pages").asInt());
 
             lr.save(produto);
         }

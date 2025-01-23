@@ -2,7 +2,6 @@ package com.imd.br.bookRecomendation.Controller;
 
 import com.imd.br.bookRecomendation.Api.ImportadorProdutos;
 import com.imd.br.bookRecomendation.Model.Livro;
-import com.imd.br.bookRecomendation.Model.Produto;
 import com.imd.br.bookRecomendation.Service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/livros")
+public class LivroController {
 
     @Autowired
     private ProdutoService<Livro> ls;
@@ -58,7 +57,7 @@ public class ProdutoController {
 
     @PostMapping("/importar")
     public ResponseEntity<String> importarProdutos() {
-        il.importarProdutos("books");
+        il.importarProdutos("comedy");
         return ResponseEntity.ok("Importação de produtos iniciada!");
     }
 }
